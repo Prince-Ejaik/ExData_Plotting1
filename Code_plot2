@@ -1,0 +1,17 @@
+# Load data.table
+library(data.table)
+
+# Reading in data from the source file
+power_info <- data.table::fread(input = "household_power_consumption.txt",   na.strings="?")
+# Subsetting data and Changing Date Column to Date Type as required
+sub_power_info <- power_info[power_info$Date %in% c("1/2/2007","2/2/2007") ,]
+date_time <- strptime(paste(sub_power_info $Date, sub_power_info$Time, sep=" "), "%d/%m/%Y %H:%M:%S")
+
+# Plotting the png file number 2
+globalActivePower <- as.numeric(sup_power_info$Global_active_power)
+png("plot2.png", width=480, height=480)
+plot(date_time, globalActivePower, type="l", xlab="", ylab="Global Active Power (kilowatts)")
+
+# Concluding the plotting process
+dev.off()
+
