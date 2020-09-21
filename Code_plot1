@@ -1,0 +1,15 @@
+# I used data.table for this project
+
+# Download, install, and load data.table
+install.packages("data.table")
+library(data.table)
+
+# Reading in data from the source file
+power_info <- data.table::fread(input = "household_power_consumption.txt",   na.strings="?")
+# Subsetting data and Changing Date Column to Date Type as required
+sub_power_info <- power_info[power_info$Date %in% c("1/2/2007","2/2/2007") ,]
+
+# Ploting the png file number 1
+png("plot1.png", width=480, height=480)
+hist(globalActivePower, col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)")
+dev.off()
